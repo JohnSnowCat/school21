@@ -6,7 +6,7 @@
 /*   By: lormond- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 19:10:36 by lormond-          #+#    #+#             */
-/*   Updated: 2018/10/07 22:32:00 by lormond-         ###   ########.fr       */
+/*   Updated: 2018/10/08 12:23:16 by lormond-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,21 @@ void	putstr(char *str)
 
 void	putnbr(int nb)
 {
-	if (nb > 9)
-		putnbr(nb/10);
-	putchar(nb%10 +'0');
+	if (nb == -2147483648)
+		putstr("-2147483648");
+
+	else
+	{
+		if (nb < 0)
+		{	
+			putchar('-');
+			nb = nb *(-1);
+		}
+	
+		if (nb > 9)
+			putnbr(nb/10);
+		putchar(nb%10 +'0');
+	}
 }
 
 int		atoi(char *str)
@@ -56,7 +68,7 @@ int		atoi(char *str)
 		k++;
 	}
 	if (neg == 1)
-		return (-nb);
+		return (nb = nb * (-1));
 	else
 		return (nb);
 }
@@ -75,9 +87,12 @@ int	main(int ac, char **av)
 	else
 		while (ac > i)
 		{
+		putstr("input are wrong");
+				write(1, "\n", 1);
 			while (av[i] != '\0')
 			{
 				putstr(av[i]);
+				write(1, "\n", 1);
 				i++;
 			}
 		}
